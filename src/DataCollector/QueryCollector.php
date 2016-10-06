@@ -54,7 +54,7 @@ class QueryCollector extends PDOCollector{
 		foreach ( $succeed as $profile ) {
 			$data['statements'][] = array(
 				'sql'          => $renderOrNot?$profile->getRealSQL():$profile->getSQLStatement(),
-				'params'       => $profile->getSqlVariables(),
+				'params'       => $profile->getSqlBindTypes(),
 				'row_count'    => $profile->affect_rows,
 				'stmt_id'      => $profile->source,
 				'connection'    => $show_conn?$profile->connection:null,

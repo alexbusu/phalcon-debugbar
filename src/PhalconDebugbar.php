@@ -655,7 +655,8 @@ class;
 					$profiler->setDb($db);
 					if ($event->getType() == 'beforeQuery') {
 						$sql = $db->getRealSQLStatement();
-                        $bindTypes = $db->getSQLBindTypes() ?: $db->getSqlVariables();
+						is_null( $params ) && ( $params = $db->getSqlVariables() );
+						$bindTypes = $db->getSQLBindTypes();
                         if ( stripos( strtr($sql,[' '=>'']), 'SELECTIF(COUNT(*)>0,1,0)FROM`INFORMATION_SCHEMA`.`TABLES`' )===false
 							&& stripos( $sql, 'DESCRIBE')!==0) {
                             $profiler->startProfile($sql,$params,$bindTypes);

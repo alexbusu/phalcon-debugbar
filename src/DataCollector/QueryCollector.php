@@ -43,7 +43,7 @@ class QueryCollector extends PDOCollector{
 		foreach ( $failed as $profile ) {
 			$data['statements'][] = array(
 				'sql'          => $renderOrNot?$profile->getRealSQL():$profile->getSQLStatement(),
-				'params'       => $profile->getSqlBindTypes() ?: $profile->getSqlVariables(),
+				'params'       => $profile->getSqlVariables(),
 				'is_success'    => false,
 				'stmt_id'       => $profile->source,
                 'error_code'    => $profile->err_code,
@@ -54,7 +54,7 @@ class QueryCollector extends PDOCollector{
 		foreach ( $succeed as $profile ) {
 			$data['statements'][] = array(
 				'sql'          => $renderOrNot?$profile->getRealSQL():$profile->getSQLStatement(),
-				'params'       => $profile->getSqlBindTypes() ?: $profile->getSqlVariables(),
+				'params'       => $profile->getSqlVariables(),
 				'row_count'    => $profile->affect_rows,
 				'stmt_id'      => $profile->source,
 				'connection'    => $show_conn?$profile->connection:null,
